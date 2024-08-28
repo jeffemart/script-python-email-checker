@@ -29,8 +29,9 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: your-dockerhub-username/python-flask-email-verifier:latest
-        tags: your-dockerhub-username/python-flask-email-verifier:${{ github.sha }}
+        tags: |
+          your-dockerhub-username/your-image-name:latest
+          your-dockerhub-username/your-image-name:${{ github.sha }}
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
