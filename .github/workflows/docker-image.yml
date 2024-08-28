@@ -2,8 +2,10 @@ name: Docker Image CI
 
 on:
   push:
+    branches:
+      - main
     tags:
-      - 'v*.*.*'  # Assumindo que suas tags de versão seguem o formato v1.0.0
+      - 'v*.*.*'
 
 jobs:
   build:
@@ -28,7 +30,7 @@ jobs:
         push: true
         tags: |
           jeffersondevelopers/python-flask-email-verifier:latest
-          jeffersondevelopers/python-flask-email-verifier:${{ github.event.ref_name }}
+          jeffersondevelopers/python-flask-email-verifier:${{ github.ref_name }}
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
