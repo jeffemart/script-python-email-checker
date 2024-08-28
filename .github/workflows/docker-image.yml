@@ -30,8 +30,8 @@ jobs:
       with:
         push: true
         tags: |
-          your-dockerhub-username/your-image-name:latest
-          your-dockerhub-username/your-image-name:${{ github.sha }}
+          your-dockerhub-username/python-flask-email-verifier:latest
+          your-dockerhub-username/python-flask-email-verifier:${{ github.sha }}
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
