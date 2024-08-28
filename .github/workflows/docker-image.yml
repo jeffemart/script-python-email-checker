@@ -6,7 +6,7 @@ on:
       - main
       - 'release/**'
     tags:
-      - '*'
+      - 'v*.*.*'  # Assumindo que suas tags de versão seguem o formato v1.0.0
 
 jobs:
   build:
@@ -14,13 +14,13 @@ jobs:
 
     steps:
     - name: Check out the repository
-      uses: actions/checkout@v4  # Atualizado para a versão mais recente
+      uses: actions/checkout@v4
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3  # Atualizado para a versão mais recente
+      uses: docker/setup-buildx-action@v3
 
     - name: Log in to Docker Hub
-      uses: docker/login-action@v3  # Atualizado para a versão mais recente
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
@@ -31,7 +31,7 @@ jobs:
         push: true
         tags: |
           jeffersondevelopers/python-flask-email-verifier:latest
-          jeffersondevelopers/python-flask-email-verifier:${{ github.sha }}
+          jeffersondevelopers/python-flask-email-verifier:${{ github.ref_name }}
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
